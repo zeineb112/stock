@@ -84,7 +84,9 @@ DATABASES = {
         'NAME': 'db.sqlite3',
     }
 }
-
+DATABASES = {
+    'default':dj_database_url.parse(os.environ.get("DATABASE_URL"))
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -129,7 +131,7 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'bookstore.User'
 
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles','static')
 
 STATICFILES_DIRS = [
 os.path.join(BASE_DIR, 'static'),
