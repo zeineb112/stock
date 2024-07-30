@@ -1,0 +1,112 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="col-md-10 col-sm-5 col-xs-5">
+    <style>
+        body {
+            background-image: url('{% static "img3.jpg" %}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
+<div class="container">
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="chart-container"style="padding-top:40px">
+                    <div style="width: 100%; margin: 0 auto;">
+
+                        <canvas id="myChart" width="300" height="150"></canvas>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="chart-container" style="padding-top:40px">
+                    <div style="width: 60%; margin: 0 auto;">
+                        <canvas id="mySecondChart" width="150" height="150"></canvas>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    
+</div>
+{% endblock content %}
+
+{% block scripts %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        const ctx = document.getElementById('myChart').getContext('2d');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [{% for course in course_list %} '{{ course }}', {% endfor %}],
+                datasets: [{
+                    label: 'controleur',
+                    data: [{% for number in number_list %} {{ number }}, {% endfor %}],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        const ctx2 = document.getElementById('mySecondChart').getContext('2d');
+
+        const data2 = {
+            labels: [
+            {% for course in course_list %} '{{ course }}', {% endfor %}
+            ],
+            datasets: [{
+                label: 'My First Dataset',
+                data: [{% for number in number_list %} {{ number }}, {% endfor %}],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)'  
+
+                ],
+                hoverOffset: 4
+            }]
+        };
+
+        new Chart(ctx2, {
+            type: 'doughnut',
+            data: data2,
+            options: {
+                // You can add additional options for your doughnut chart here
+            }
+        });
+    });
+</script>
+{% endblock scripts %}

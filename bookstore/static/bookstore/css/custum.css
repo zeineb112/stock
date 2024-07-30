@@ -1,0 +1,7 @@
+.title {
+    color: white;
+    font-size: 32px; /* Adjust font size as needed */
+    white-space: nowrap; /* Prevent line breaks */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Add ellipsis if text overflows */
+}

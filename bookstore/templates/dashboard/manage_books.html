@@ -1,0 +1,125 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row pt-4">
+        <div class="col-sm-1 text-danger">
+            <!-- Placeholder for potential content -->
+        </div>
+
+        <div class="col-sm-15">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table text-primary"></i> Manage Request
+                </div>
+                <div class="card-body">
+                    <!-- Breadcrumbs -->
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="example" class="table table-bordered" style="font-size: 15px;" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>First Name</th>
+                                            <th>Ilot</th>
+                                            <th>Job</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Etat</th>
+                                            <th>UAP</th>
+                                            <th style="color: black; white-space: nowrap;">Nbre Pdt Controlé</th>
+                                            <th style="color: black; white-space: nowrap;">Taken by</th>
+                                            <th>Status</th>
+                                            <th>Begin</th>
+                                            <th>Finish</th>
+                                            <th>Etat</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% if books %}
+                                            {% for book in books %}
+                                                <tr>
+                                                    <td>{{ book.title }}</td>
+                                                    <td>
+                                                        {% if book.is_publisher == True %}
+                                                            <p>1</p>
+                                                        {% elif book.is_publisher == False %}
+                                                            <p>2</p>
+                                                        {% endif %} 
+                                                    </td> 
+                                                    <td>{{ book.year }}</td>
+                                                    <td style="color: black; white-space: nowrap;">{{ book.date }}</td>
+                                                    <td>{{ book.time }}</td>
+                                                    <td>
+                                                        {% if book.is_admin == True %}
+                                                        <p style="color: red; white-space: nowrap;">urgent</p>
+                                                        {% elif book.is_admin == False %}
+                                                        <p style="color: green; white-space: nowrap;">Normal</p>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>{{ book.UAP }}</td>
+                                                    <td style="text-align: center;">{{ book.produit }}</td>
+                                                    <td style="color: red; white-space: nowrap;">{{ book.urgent }}</td>
+                                                    <td class="{% if book.status %}text-success{% else %}text-warning white-space: nowrap{% endif %}">
+                                                        {{ book.status|yesno:"Completed,In Progress" }}
+                                                    </td>
+                                                        <td>{{ book.time2 }}</td>
+                                                    <td>{{ book.time1 }}</td>
+                                                    <td>
+                                                        <a href="{% url 'ccnbook' book.pk %}"><button type="button" class="btn btn-warning"> Etat</button></a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="{% url 'adbook' book.pk %}" class="btn btn-danger">Delete</a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+
+                                {% if is_paginated %}
+                                    <ul class="pagination">
+                                        {% if page_obj.has_previous %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item disabled">
+                                                <span class="page-link">&laquo;</span>
+                                            </li>
+                                        {% endif %}
+                                        {% for i in paginator.page_range %}
+                                            <li class="page-item {% if page_obj.number == i %}active{% endif %}">
+                                                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                                            </li>
+                                        {% endfor %}
+                                        {% if page_obj.has_next %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item disabled">
+                                                <span class="page-link">&raquo;</span>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

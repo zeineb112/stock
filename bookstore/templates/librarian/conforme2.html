@@ -1,0 +1,32 @@
+{% extends 'librarian/base.html' %}
+
+{% load static %}
+
+{% block body %}
+<div id="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <div class="card mb-4">
+            <div class="card-body">
+                <form action="{% if book.pk %}{% url 'conforme1' pk=book.pk %}{% endif %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-label-group">
+                                    <select class="form-control" name="conforme">
+                                        <option value="{{ choice1.2 }}">Choose Request state</option>
+                                        <option value="Non conforme">Non conforme</option>
+                                        <option value="conforme">conforme</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-block" type="submit">Submit &nbsp;&nbsp;&nbsp;<span></span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
