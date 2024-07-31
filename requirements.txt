@@ -63,7 +63,6 @@ django-summernote==0.8.20.0
 django-taggit==5.0.1
 django-tinymce==3.4.0
 django-widget-tweaks==1.4.8
-entrypoints==0.
 ipython==7.31.0
 ipywidgets==7.6.5
 isort==5.13.2
