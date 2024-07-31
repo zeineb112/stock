@@ -91,13 +91,10 @@ pydot==1.4.2
 pyfiglet==0.8.post1
 pygame==2.1.0
 PyGetWindow==0.0.9
-pyHanko==0.25.0
-pyhanko-certvalidator==0.26.3
 PyJWT==2.8.0
 pylint==3.2.5
 Pympler==1.0.1
 PyMsgBox==1.0.9
-PyMySQL==1.0.2
 pyodbc==5.1.0
 pyparsing==3.0.6
 pypdf==4.2.0
