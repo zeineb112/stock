@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-
 import dj_database_url
 import pyodbc
 
@@ -20,7 +19,7 @@ SECRET_KEY = '=_!dja1)@@yk!=fw!=5fp2$rs_)678g@+5#)((d0t&#9t^1mn8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app']
 
 
 # Application definition
@@ -84,10 +83,6 @@ DATABASES = {
         'NAME': 'db.sqlite3',
     }
 }
-DATABASES = {
-    'default':dj_database_url.parse(os.environ.get("DATABASE_URL"))
-}
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -136,7 +131,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles','static')
 STATICFILES_DIRS = [
 os.path.join(BASE_DIR, 'static'),
 ]
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'

@@ -3,6 +3,7 @@ from django.urls import include, path
 from . import views
 
 urlpatterns = [
+path('admin_tools/', include('admin_tools.urls')),
 
 # Shared URL's
 path('', views.login_form, name='home'),
